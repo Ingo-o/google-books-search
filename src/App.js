@@ -1,16 +1,11 @@
 import './App.css';
-import SearchAreaContainer from "./components/SearchArea/SearchAreaContainer";
+import SearchingAreaContainer from "./components/SearchingArea/SearchingAreaContainer";
 import BookListContainer from "./components/BookList/BookListContainer";
-import {Route} from "react-router-dom";
-import BookInfoContainer from "./components/BookInfo/BookInfoContainer";
 
 const App = () => {
     return (
-        <div className='app-wrapper'>
-            <SearchAreaContainer/>
-            <div>
-                <Route path="/info/:bookId" render={() => <BookInfoContainer/>}/>
-            </div>
+        <div>
+            <SearchingAreaContainer/>
             <BookListContainer/>
         </div>
     );

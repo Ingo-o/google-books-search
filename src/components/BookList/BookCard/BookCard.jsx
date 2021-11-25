@@ -1,4 +1,5 @@
 import React from "react";
+import css from "./BookCard.module.css";
 
 const BookCard = (props) => {
     const {categories, title, authors} = props.volumeInfo;
@@ -14,14 +15,14 @@ const BookCard = (props) => {
     }
 
     return (
-            <div className="card-container">
-                <img src={thumbnail} alt=""/>
-                <div className="desc">
-                    <p>{categories[0]}</p>
-                    <h2>{title}</h2>
-                    <h3>Authors: {authorsList(authors)}</h3>
-                </div>
+        <div>
+            <img src={thumbnail} alt=""/>
+            <div>
+                <p>{categories[0]}</p>
+                <h2>{title}</h2>
+                <h3>Authors: {authorsList(authors)}</h3>
             </div>
+        </div>
     )
 }
 

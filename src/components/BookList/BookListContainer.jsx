@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import BookList from "./BookList";
-import {fetchingToggle, loadMore} from "../../redux/reducer";
+import {loadMoreBooks} from "../../redux/reducer";
 
 class BookListContainer extends React.Component {
     render() {
@@ -10,16 +10,13 @@ class BookListContainer extends React.Component {
             <BookList state={state}/>
         );
     }
-};
+}
 
 const mapStateToProps = (state) => ({
-    books: state.appState.books,
-    totalItems: state.appState.totalItems,
-    startIndex: state.appState.startIndex,
-    searchField: state.appState.searchField,
-    subject: state.appState.subject,
-    sortingMethod: state.appState.sortingMethod,
-    isFetching: state.appState.isFetching,
+    books: state.books, totalItems: state.totalItems, startIndex: state.startIndex,
+    searchingField: state.searchingField, subject: state.subject, sortingMethod: state.sortingMethod,
+    isFetching: state.isFetching,
 });
 
-export default BookListContainer = connect(mapStateToProps, {loadMore, fetchingToggle})(BookList);
+// eslint-disable-next-line no-unused-vars
+export default BookListContainer = connect(mapStateToProps, {loadMoreBooks})(BookList);
