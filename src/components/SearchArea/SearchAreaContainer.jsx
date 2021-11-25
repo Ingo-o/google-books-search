@@ -1,6 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addFoundBooks, updateSearchFieldText, updateSortingMethod} from "../../redux/reducer";
+import {
+    addFoundBooks, fetchingToggle, resetBooksAndIndex,
+    setTotalItems,
+    updateSearchFieldText,
+    updateSortingMethod,
+    updateSubject
+} from "../../redux/reducer";
 import SearchArea from "./SearchArea";
 
 class SearchAreaContainer extends React.Component {
@@ -13,11 +19,23 @@ class SearchAreaContainer extends React.Component {
 };
 
 // Возвращает объект с данными из state которые будут переданы в презентационную компоненту в качестве пропсов.
-const mapStateToProps = (state) => ({state: state.appState});
+const mapStateToProps = (state) => ({
+    searchField: state.appState.searchField,
+    subject: state.appState.subject,
+    sortingMethod: state.appState.sortingMethod,
+    startIndex: state.appState.startIndex,
+    isFetching: state.appState.isFetching,
+});
 
 // Объединение разных обработчиков функцией compose.
 export default SearchAreaContainer = connect(mapStateToProps, {
-    updateSearchFieldText, updateSortingMethod, addFoundBooks,
+    updateSearchFieldText,
+    updateSortingMethod,
+    addFoundBooks,
+    updateSubject,
+    setTotalItems,
+    resetBooksAndIndex,
+    fetchingToggle,
 })(SearchArea);
 
 /*

@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import BookList from "./BookList";
+import {fetchingToggle, loadMore} from "../../redux/reducer";
 
 class BookListContainer extends React.Component {
     render() {
@@ -12,10 +13,18 @@ class BookListContainer extends React.Component {
 };
 
 // Возвращает объект с данными из state которые будут переданы в презентационную компоненту в качестве пропсов.
-const mapStateToProps = (state) => ({books: state.appState.books});
+const mapStateToProps = (state) => ({
+    books: state.appState.books,
+    totalItems: state.appState.totalItems,
+    startIndex: state.appState.startIndex,
+    searchField: state.appState.searchField,
+    subject: state.appState.subject,
+    sortingMethod: state.appState.sortingMethod,
+    isFetching: state.appState.isFetching,
+});
 
 // Объединение разных обработчиков функцией compose.
-export default BookListContainer = connect(mapStateToProps, {})(BookList);
+export default BookListContainer = connect(mapStateToProps, {loadMore, fetchingToggle})(BookList);
 
 /*
 2. withRouter - HOC-обертка передающая в компоненту данные из URL.

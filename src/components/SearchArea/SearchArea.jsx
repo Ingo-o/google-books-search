@@ -1,8 +1,12 @@
 import {getBooksAJAX} from "../../api";
+import preloader from "../../assets/preloader.svg";
+import React from "react";
 
 const SearchArea = (props) => {
-    const {searchField} = props.state;
-    const {updateSearchFieldText, updateSortingMethod, addFoundBooks} = props;
+    const {
+        searchField, subject, sortingMethod, resetBooksAndIndex, startIndex, isFetching,
+        updateSearchFieldText, updateSortingMethod, addFoundBooks, updateSubject, setTotalItems, fetchingToggle,
+    } = props;
 
     const addNewText = (e) => updateSearchFieldText(e.target.value);
 
@@ -10,11 +14,23 @@ const SearchArea = (props) => {
         updateSortingMethod(e.target.value);
     }
 
+    const choseSubject = (e) => {
+        updateSubject(e.target.value);
+    }
+
     const searchBooks = (e) => {
         e.preventDefault();
-        getBooksAJAX(searchField)
-            .then(items => {
-                addFoundBooks(items);
+        resetBooksAndIndex()
+        fetchingToggle(true);
+        getBooksAJAX(searchField, subject, sortingMethod, startIndex)
+            .then(response => {
+                if (response === 'STOP') {
+                    alert('Sorry, there are no books on your request.')
+                    return
+                }
+                fetchingToggle(false);
+                addFoundBooks(response.items);
+                setTotalItems(response.totalItems);
             })
     }
 
@@ -23,10 +39,18 @@ const SearchArea = (props) => {
             <form onSubmit={searchBooks}>
                 <input onChange={addNewText} type="text" value={searchField}/>
                 <button type="submit">Search</button>
-                <select defaultValue="Sort" onChange={choseSortingMethod}>
-                    <option disabled value="Sort">Sort</option>
-                    <option value="Newest">Newest</option>
-                    <option value="Oldest">Oldest</option>
+                <select defaultValue="relevance" onChange={choseSortingMethod}>
+                    <option value="relevance">Relevance</option>
+                    <option value="newest">Newest</option>
+                </select>
+                <select defaultValue="all" onChange={choseSubject}>
+                    <option value="all">All</option>
+                    <option value="art">Art</option>
+                    <option value="biography">Biography</option>
+                    <option value="computers">Computers</option>
+                    <option value="history">History</option>
+                    <option value="medical">Medical</option>
+                    <option value="poetry">Poetry</option>
                 </select>
             </form>
         </div>

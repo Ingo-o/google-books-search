@@ -1,15 +1,25 @@
 import React from "react";
 
 const BookCard = (props) => {
-    const {image, categories, title, authors, publishedDate} = props;
+    const {categories, title, authors} = props.volumeInfo;
+    const {thumbnail} = props.volumeInfo.imageLinks;
+
+    const authorsList = (authors) => {
+        const listItems = authors.map((author, index) =>
+            <li key={index.toString()}>{author}</li>
+        );
+        return (
+            <ul>{listItems}</ul>
+        );
+    }
+
     return (
         <div className="card-container">
-            <img src={image} alt=""/>
+            <img src={thumbnail} alt=""/>
             <div className="desc">
-                <p>{categories}</p>
+                <p>{categories[0]}</p>
                 <h2>{title}</h2>
-                <h3>Authors: {authors}</h3>
-                <p>Year of publish: {publishedDate.substring(0, 4)}</p>
+                <h3>Authors: {authorsList(authors)}</h3>
             </div>
         </div>
     )
