@@ -1,6 +1,3 @@
-// Reducer принимает на вход state и action и возвращает измененный (на основании action) state.
-// Action это объект содержащий информацию о том что мы хотим изменить.
-
 // ACTION CREATORS:
 const UPDATE_SEARCH_FIELD_TEXT = 'UPDATE_SEARCH_FIELD_TEXT';
 export const updateSearchFieldText = (newText) => ({type: UPDATE_SEARCH_FIELD_TEXT, newText});
@@ -26,6 +23,9 @@ export const resetBooksAndIndex = () => ({type: RESET_BOOKS_AND_INDEX});
 const FETCHING_TOGGLE = 'FETCHING_TOGGLE';
 export const fetchingToggle = (isFetching) => ({type: FETCHING_TOGGLE, isFetching});
 
+const SET_TARGET_BOOK = 'SET_TARGET_BOOK';
+export const setTargetBook = (targetBook) => ({type: SET_TARGET_BOOK, targetBook});
+
 const initialState = {
     books: [],
     searchField: '',
@@ -34,11 +34,10 @@ const initialState = {
     totalItems: null,
     startIndex: 0,
     isFetching: false,
+    targetBook: null,
 };
 
 const appReducer = (state = initialState, action) => {
-    // В виду специфики работы react-redux, из редьюсера нужно возвращать не измененный state,
-    // а его копию с новыми изменениями. Глубоко копируем только то что собираемся менять.
     switch (action.type) {
         case UPDATE_SEARCH_FIELD_TEXT:
             return {
@@ -81,6 +80,11 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: action.isFetching,
+            };
+        case SET_TARGET_BOOK:
+            return {
+                ...state,
+                targetBook: action.targetBook,
             };
         default:
             return state;

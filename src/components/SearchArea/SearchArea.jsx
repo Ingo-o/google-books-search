@@ -25,8 +25,9 @@ const SearchArea = (props) => {
         getBooksAJAX(searchField, subject, sortingMethod, startIndex)
             .then(response => {
                 if (response === 'STOP') {
-                    alert('Sorry, there are no books on your request.')
-                    return
+                    alert('Sorry, there are no books on your request.');
+                    fetchingToggle(false);
+                    return;
                 }
                 fetchingToggle(false);
                 addFoundBooks(response.items);
@@ -53,6 +54,7 @@ const SearchArea = (props) => {
                     <option value="poetry">Poetry</option>
                 </select>
             </form>
+            {isFetching ? <img src={preloader} alt='preloader'/> : null}
         </div>
     )
 }

@@ -2,6 +2,7 @@ import BookCard from "../BookCard";
 import {getBooksAJAX} from "../../api";
 import preloader from "../../assets/preloader.svg";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 const BookList = (props) => {
     const {
@@ -22,8 +23,9 @@ const BookList = (props) => {
         getBooksAJAX(searchField, subject, sortingMethod, startIndex + 2 )
             .then(response => {
                 if (response === 'STOP') {
-                    alert('Sorry, there are no more books on your request.')
-                    return
+                    alert('Sorry, there are no more books on your request.');
+                    fetchingToggle(false);
+                    return;
                 }
                 fetchingToggle(false);
                 loadMore(response.items, startIndex);
@@ -40,10 +42,11 @@ const BookList = (props) => {
             <div className="list">
                 {
                     books.map((book) => {
-                        return <BookCard
+                        return <NavLink to={'/info/' + book.id}>
+                        <BookCard
                             key={book.id}
                             volumeInfo={book.volumeInfo}
-                        />
+                        /></NavLink>
                     })
                 }
             </div>
