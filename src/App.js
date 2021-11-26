@@ -4,7 +4,7 @@ import BookListContainer from "./components/BookList/BookListContainer";
 
 const App = () => {
     return (
-        <div>
+        <div className="app-wrapper">
             <SearchingAreaContainer/>
             <BookListContainer/>
         </div>

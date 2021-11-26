@@ -10,17 +10,17 @@ const BookCard = (props) => {
             <li key={index.toString()}>{author}</li>
         );
         return (
-            <ul>{listItems}</ul>
+            <ul className={css.authorsList}>{listItems}</ul>
         );
     }
 
     return (
-        <div>
-            <img src={thumbnail} alt=""/>
+        <div className={css.bookCard}>
+            <img className={css.bookCover} src={thumbnail} alt=""/>
             <div>
-                <p>{categories[0]}</p>
-                <h2>{title}</h2>
-                <h3>Authors: {authorsList(authors)}</h3>
+                <p className={css.category}>{categories[0]}</p>
+                <p className={css.title}>{title}</p>
+                <p>{authorsList(authors)}</p>
             </div>
         </div>
     )

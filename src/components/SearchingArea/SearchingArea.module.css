@@ -1,0 +1,39 @@
+.searchingArea {
+    background: url(https://4.downloader.disk.yandex.ru/preview/8732b73c51b72f4cc3b99bc39767b19e55430019e859e2e13012efa66563ee68/inf/Ok70-HcWAxN2XzcMiYjX1eIJj0rVAA70SeCmyaP2TMSYraAv0bgKlRPnLLirgrc8i3Uw9tRIcqEwhdQzEIS8Tg%3D%3D?uid=12379035&filename=Library.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=12379035&tknv=v2&size=1279x538);
+    height: 110px;
+    padding: 20px 20px 25px;
+    display: flex;
+}
+
+.title {
+    font-size: 25px;
+    color: white;
+    text-shadow: black 1px 1px 1px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.input {
+    width: 280px;
+}
+
+.button {
+    margin-left: 5px;
+}
+
+.selectorTitle {
+    float: left;
+    color: white;
+    text-shadow: black 1px 1px 1px;
+    font-family: sans-serif;
+}
+
+.selector {
+    float: left;
+    margin-right: 10px;
+    margin-top: 12px;
+}
+
+.selectorField {
+    margin-left: 5px;
+}

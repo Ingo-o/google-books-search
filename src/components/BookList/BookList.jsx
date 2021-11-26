@@ -16,22 +16,24 @@ const BookList = (props) => {
 
     if (books.length === 0) {
         return (
-            <div>What kind of books do you want?</div>
+            <div className={css.inscription}>What kind of book do you want?</div>
         );
     }
 
     return (
         <div>
-            <div>Total items: {totalItems}</div>
-            <div>
+            <div className={css.inscription}>Total items: {totalItems}</div>
+            <div className={css.booksContainer}>
                 {
                     books.map((book) => {
                         return <BookCard key={book.id} volumeInfo={book.volumeInfo}/>
                     })
                 }
             </div>
-            {isFetching ? <Preloader/> : null}
-            <button onClick={loadMoreBooksThunk}>Load more</button>
+            <div className={css.loadMore}>
+                <button className={css.button} onClick={loadMoreBooksThunk}>Load more</button>
+                <div>{isFetching ? <Preloader/> : null}</div>
+            </div>
         </div>
     )
 }

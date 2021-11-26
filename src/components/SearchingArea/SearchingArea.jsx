@@ -20,25 +20,37 @@ const SearchingArea = (props) => {
     }
 
     return (
-        <div>
-            <form onSubmit={searchBooksThunk}>
-                <input onChange={addNewText} type="text" value={searchingField}/>
-                <button type="submit">Search</button>
-                <select defaultValue="relevance" onChange={choseSortingMethod}>
-                    <option value="relevance">Relevance</option>
-                    <option value="newest">Newest</option>
-                </select>
-                <select defaultValue="all" onChange={choseSubject}>
-                    <option value="all">All</option>
-                    <option value="art">Art</option>
-                    <option value="biography">Biography</option>
-                    <option value="computers">Computers</option>
-                    <option value="history">History</option>
-                    <option value="medical">Medical</option>
-                    <option value="poetry">Poetry</option>
-                </select>
-            </form>
-            {isFetching ? <Preloader/> : null}
+        <div className={css.searchingArea}>
+            <div>
+                <p className={css.title}>Google search books</p>
+                <form onSubmit={searchBooksThunk}>
+                    <input className={css.input} onChange={addNewText} type="text" value={searchingField}/>
+                    <button className={css.button} type="submit">Search</button>
+                    <div>
+                        <div className={css.selector}>
+                            <div className={css.selectorTitle}>Sorting by:</div>
+                            <select className={css.selectorField} defaultValue="relevance"
+                                    onChange={choseSortingMethod}>
+                                <option value="relevance">Relevance</option>
+                                <option value="newest">Newest</option>
+                            </select>
+                        </div>
+                        <div className={css.selector}>
+                            <div className={css.selectorTitle}>Categories:</div>
+                            <select className={css.selectorField} defaultValue="all" onChange={choseSubject}>
+                                <option value="all">All</option>
+                                <option value="art">Art</option>
+                                <option value="biography">Biography</option>
+                                <option value="computers">Computers</option>
+                                <option value="history">History</option>
+                                <option value="medical">Medical</option>
+                                <option value="poetry">Poetry</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div>{isFetching ? <Preloader/> : null}</div>
         </div>
     )
 }

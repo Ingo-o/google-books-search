@@ -5,7 +5,7 @@ import preloader from "../assets/preloader.svg"
 const Preloader = () => {
     return (
         <div>
-            <img src={preloader} alt="Loading wheel"/>
+            <img className={css.loadingWheel} src={preloader} alt="Loading wheel"/>
         </div>
     )
 }
