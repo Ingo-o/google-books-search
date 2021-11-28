@@ -1,4 +1,5 @@
 import {getBooksAJAX} from "../api";
+import {uniqBy} from "lodash";
 
 // ACTION CREATORS:
 const UPDATE_SEARCHING_FIELD_TEXT = 'UPDATE_SEARCHING_FIELD_TEXT';
@@ -19,21 +20,30 @@ export const setTotalItems = (totalItems) => ({type: SET_TOTAL_ITEMS, totalItems
 const LOAD_MORE = 'LOAD_MORE';
 export const loadMore = (newBooks, currentIndex) => ({type: LOAD_MORE, newBooks, currentIndex});
 
-const RESET_BOOKS_AND_INDEX = 'RESET_BOOKS_AND_INDEX';
-export const resetBooksAndIndex = () => ({type: RESET_BOOKS_AND_INDEX});
+const RESET_OPTIONS = 'RESET_OPTIONS';
+export const resetOptions = () => ({type: RESET_OPTIONS});
 
 const FETCHING_TOGGLE = 'FETCHING_TOGGLE';
-export const fetchingToggle = (isFetching) => ({type: FETCHING_TOGGLE, isFetching});
+export const fetchingToggle = (fetchingStatus) => ({type: FETCHING_TOGGLE, fetchingStatus});
+
+const SET_CHOSEN_BOOK = 'SET_CHOSEN_BOOK';
+export const setChosenBook = (chosenBook) => ({type: SET_CHOSEN_BOOK, chosenBook});
+
+const DELETE_CHOSEN_BOOK = 'DELETE_CHOSEN_BOOK';
+export const deleteChosenBook = () => ({type: DELETE_CHOSEN_BOOK});
 
 // THUNKS:
 export const searchBooks = (searchingField, subject, sortingMethod, startIndex) => {
     return (dispatch) => {
-        dispatch(resetBooksAndIndex());
-        dispatch(fetchingToggle(true));
+        dispatch(resetOptions());
+        dispatch(fetchingToggle("searching"));
         getBooksAJAX(searchingField, subject, sortingMethod, startIndex)
             .then(response => {
                 if (response === 'STOP') {
                     alert('Sorry, there are no books on your request.');
+                    dispatch(fetchingToggle(false));
+                    return;
+                } else if (response === 'ERROR') {
                     dispatch(fetchingToggle(false));
                     return;
                 }
@@ -46,11 +56,13 @@ export const searchBooks = (searchingField, subject, sortingMethod, startIndex) 
 
 export const loadMoreBooks = (searchingField, subject, sortingMethod, startIndex) => {
     return (dispatch) => {
-        dispatch(fetchingToggle(true));
+        dispatch(fetchingToggle("loadingMore"));
         getBooksAJAX(searchingField, subject, sortingMethod, startIndex)
             .then(response => {
                 if (response === 'STOP') {
-                    alert('Sorry, there are no more books on your request.');
+                    dispatch(fetchingToggle(false));
+                    return;
+                } else if (response === 'ERROR') {
                     dispatch(fetchingToggle(false));
                     return;
                 }
@@ -62,7 +74,7 @@ export const loadMoreBooks = (searchingField, subject, sortingMethod, startIndex
 
 const initialState = {
     books: [], searchingField: '', sortingMethod: 'relevance', subject: 'all',
-    totalItems: null, startIndex: 0, isFetching: false,
+    totalItems: null, startIndex: 0, isFetching: false, chosenBook: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -85,7 +97,7 @@ const reducer = (state = initialState, action) => {
         case ADD_FOUND_BOOKS:
             return {
                 ...state,
-                books: action.foundBooks,
+                books: uniqBy(action.foundBooks, 'id'),
             };
         case SET_TOTAL_ITEMS:
             return {
@@ -96,18 +108,29 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 startIndex: action.currentIndex + 30,
-                books: [...state.books, ...action.newBooks],
+                books: uniqBy([...state.books, ...action.newBooks], 'id'),
             };
-        case RESET_BOOKS_AND_INDEX:
+        case RESET_OPTIONS:
             return {
                 ...state,
                 startIndex: 0,
                 books: [],
+                chosenBook: false,
             };
         case FETCHING_TOGGLE:
             return {
                 ...state,
-                isFetching: action.isFetching,
+                isFetching: action.fetchingStatus,
+            };
+        case SET_CHOSEN_BOOK:
+            return {
+                ...state,
+                chosenBook: action.chosenBook,
+            };
+        case DELETE_CHOSEN_BOOK:
+            return {
+                ...state,
+                chosenBook: false,
             };
         default:
             return state;

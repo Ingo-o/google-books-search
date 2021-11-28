@@ -1,13 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
-import BookList from "./BookList";
-import {loadMoreBooks} from "../../redux/reducer";
+import Content from "./Content";
+import {deleteChosenBook, loadMoreBooks, setChosenBook} from "../../redux/reducer";
 
-class BookListContainer extends React.Component {
+class ContentContainer extends React.Component {
     render() {
         const {state} = this.props;
         return (
-            <BookList state={state}/>
+            <Content state={state}/>
         );
     }
 }
@@ -15,8 +15,10 @@ class BookListContainer extends React.Component {
 const mapStateToProps = (state) => ({
     books: state.books, totalItems: state.totalItems, startIndex: state.startIndex,
     searchingField: state.searchingField, subject: state.subject, sortingMethod: state.sortingMethod,
-    isFetching: state.isFetching,
+    isFetching: state.isFetching, chosenBook: state.chosenBook,
 });
 
 // eslint-disable-next-line no-unused-vars
-export default BookListContainer = connect(mapStateToProps, {loadMoreBooks})(BookList);
+export default ContentContainer = connect(mapStateToProps, {
+    loadMoreBooks, setChosenBook, deleteChosenBook
+})(Content);

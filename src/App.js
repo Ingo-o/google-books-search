@@ -1,12 +1,12 @@
 import './App.css';
 import SearchingAreaContainer from "./components/SearchingArea/SearchingAreaContainer";
-import BookListContainer from "./components/BookList/BookListContainer";
+import ContentContainer from "./components/Content/ContentContainer";
 
 const App = () => {
     return (
         <div className="app-wrapper">
             <SearchingAreaContainer/>
-            <BookListContainer/>
+            <ContentContainer/>
         </div>
     );
 }

@@ -50,7 +50,7 @@ const SearchingArea = (props) => {
                     </div>
                 </form>
             </div>
-            <div>{isFetching ? <Preloader/> : null}</div>
+            <div>{isFetching === "searching" ? <Preloader/> : null}</div>
         </div>
     )
 }

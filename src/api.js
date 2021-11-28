@@ -1,10 +1,11 @@
 import axios from "axios";
 
 export const getBooksAJAX = (searchingField, subject, sortingMethod, startIndex) => {
+    const API_key = `&key=AIzaSyCgLO4tHe1Ws7-8rjgyvmsfs27VUV0PhKk`;
     const searchStr = searchingField === '' ? 'books' : searchingField;
-    const subjectStr = subject === 'all' ? '' : `subject=${subject}`;
+    const subjectStr = subject === 'all' ? '' : `+subject=${subject}`;
     const sortingStr = sortingMethod === 'relevance' ? '' : `&orderBy=${sortingMethod}`;
-    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${subjectStr}${searchStr}${sortingStr}&maxResults=30&startIndex=${startIndex}`)
+    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchStr}${subjectStr}${API_key}${sortingStr}&maxResults=30&startIndex=${startIndex}`)
         .then(response => {
             const cleanData = (response) => {
 
@@ -33,5 +34,9 @@ export const getBooksAJAX = (searchingField, subject, sortingMethod, startIndex)
             }
 
             return cleanData(response);
-        });
+        })
+        .catch(error => {
+            alert(error);
+            return 'ERROR';
+        })
 }
