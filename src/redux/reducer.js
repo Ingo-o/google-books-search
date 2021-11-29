@@ -60,6 +60,7 @@ export const loadMoreBooks = (searchingField, subject, sortingMethod, startIndex
         getBooksAJAX(searchingField, subject, sortingMethod, startIndex)
             .then(response => {
                 if (response === 'STOP') {
+                    alert('Sorry, there are no more books on your request.');
                     dispatch(fetchingToggle(false));
                     return;
                 } else if (response === 'ERROR') {
