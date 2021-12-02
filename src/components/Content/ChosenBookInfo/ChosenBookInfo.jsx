@@ -1,6 +1,6 @@
 import React from "react";
 import css from "./ChosenBookInfo.module.css";
-import ListMaker from "../../../common/ListMaker";
+import ListMaker from "../../common/ListMaker";
 
 const ChosenBookInfo = (props) => {
     const {categories, title, authors, description} = props.chosenBook;

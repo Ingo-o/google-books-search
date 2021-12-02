@@ -1,6 +1,6 @@
 import React from "react";
 import css from "./SearchingArea.module.css";
-import Preloader from "../../common/Preloader";
+import Preloader from "../common/Preloader/Preloader";
 
 const SearchingArea = (props) => {
     const {

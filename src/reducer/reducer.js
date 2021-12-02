@@ -1,4 +1,4 @@
-import {getBooksAJAX} from "../api";
+import {getBooksAJAX} from "../services/api";
 import {uniqBy} from "lodash";
 
 // ACTION CREATORS:
@@ -108,7 +108,7 @@ const reducer = (state = initialState, action) => {
         case LOAD_MORE:
             return {
                 ...state,
-                startIndex: action.currentIndex + 30,
+                startIndex: action.currentIndex + 12,
                 books: uniqBy([...state.books, ...action.newBooks], 'id'),
             };
         case RESET_OPTIONS:

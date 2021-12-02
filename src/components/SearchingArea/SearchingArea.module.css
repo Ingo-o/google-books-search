@@ -1,5 +1,5 @@
 .searchingArea {
-    background: url(https://4.downloader.disk.yandex.ru/preview/8732b73c51b72f4cc3b99bc39767b19e55430019e859e2e13012efa66563ee68/inf/Ok70-HcWAxN2XzcMiYjX1eIJj0rVAA70SeCmyaP2TMSYraAv0bgKlRPnLLirgrc8i3Uw9tRIcqEwhdQzEIS8Tg%3D%3D?uid=12379035&filename=Library.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=12379035&tknv=v2&size=1279x538);
+    background: url('../../assets/library.jpg');
     height: 110px;
     padding: 20px 20px 25px;
     display: flex;

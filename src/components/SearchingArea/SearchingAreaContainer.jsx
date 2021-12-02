@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import SearchingArea from "./SearchingArea";
-import {searchBooks, updateSearchingFieldText, updateSortingMethod, updateSubject} from "../../redux/reducer";
+import {searchBooks, updateSearchingFieldText, updateSortingMethod, updateSubject} from "../../reducer/reducer";
 
 class SearchingAreaContainer extends React.Component {
     render() {

@@ -1,6 +1,6 @@
 import React from "react";
 import css from "./BooksList.module.css";
-import Preloader from "../../../common/Preloader";
+import Preloader from "../../common/Preloader/Preloader";
 import BookCard from "./BookCard/BookCard";
 
 const BookList = (props) => {
@@ -11,7 +11,7 @@ const BookList = (props) => {
 
     const loadMoreBooksThunk = (e) => {
         e.preventDefault();
-        loadMoreBooks(searchingField, subject, sortingMethod, startIndex + 30);
+        loadMoreBooks(searchingField, subject, sortingMethod, startIndex + 12);
     }
 
     return (

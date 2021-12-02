@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Content from "./Content";
-import {deleteChosenBook, loadMoreBooks, setChosenBook} from "../../redux/reducer";
+import {deleteChosenBook, loadMoreBooks, setChosenBook} from "../../reducer/reducer";
 
 class ContentContainer extends React.Component {
     render() {

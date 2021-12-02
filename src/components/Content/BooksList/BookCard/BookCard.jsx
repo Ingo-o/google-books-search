@@ -1,6 +1,6 @@
 import React from "react";
 import css from "./BookCard.module.css";
-import ListMaker from "../../../../common/ListMaker";
+import ListMaker from "../../../common/ListMaker";
 
 const BookCard = (props) => {
     const {categories, title, authors} = props.volumeInfo;

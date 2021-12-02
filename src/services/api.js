@@ -1,11 +1,12 @@
 import axios from "axios";
+import noImage from "../assets/no-image.jpg"
 
 export const getBooksAJAX = (searchingField, subject, sortingMethod, startIndex) => {
     const API_key = `&key=AIzaSyCgLO4tHe1Ws7-8rjgyvmsfs27VUV0PhKk`;
     const searchStr = searchingField === '' ? 'books' : searchingField;
     const subjectStr = subject === 'all' ? '' : `+subject=${subject}`;
     const sortingStr = sortingMethod === 'relevance' ? '' : `&orderBy=${sortingMethod}`;
-    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchStr}${subjectStr}${API_key}${sortingStr}&maxResults=30&startIndex=${startIndex}`)
+    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchStr}${subjectStr}${API_key}${sortingStr}&maxResults=12&startIndex=${startIndex}`)
         .then(response => {
             const cleanData = (response) => {
 
@@ -17,7 +18,7 @@ export const getBooksAJAX = (searchingField, subject, sortingMethod, startIndex)
                     totalItems: response.data.totalItems, items:
                         response.data.items.map(book => {
                             if (book.volumeInfo.hasOwnProperty('imageLinks') === false) {
-                                book.volumeInfo['imageLinks'] = {thumbnail: 'https://1.downloader.disk.yandex.ru/preview/10608339e39ea796e17e43c8327980651f36cd35ad18a69f89ed08a560add4dc/inf/bCSk7ta7eGfGJ2aCt1fJwyViYLdYuPSbu5QjUYD9Lo7p7ZzgCA05yx0X8b1gchnLLjQWhQnAoeNCerD_aCs_Ew%3D%3D?uid=12379035&filename=no-image.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=12379035&tknv=v2&size=1279x538'};
+                                book.volumeInfo['imageLinks'] = {thumbnail: noImage};
                             }
                             if (book.volumeInfo.hasOwnProperty('categories') === false) {
                                 book.volumeInfo['categories'] = [''];
