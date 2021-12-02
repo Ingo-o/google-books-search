@@ -5,14 +5,14 @@ Hello! My name is Dmitry Ingo Epikhin and this is my first project on React + Re
 To run this app you should clone this repository on your machine and write `npm start` in the project directory.
 It will opens in your browser (http://localhost:3000).
 
-##Functional:
+##Functional:  
 • Books Search  
 • Displaying detailed information about the book  
 • Filter by category  
 • Sort by relevant and old books  
 • Load-more pagination
 
-##Technology Stack:
+##Technology Stack:  
 • React / Redux / React-redux / Redux-thunk  
 • JavaScript  
 • HTML / CSS  
