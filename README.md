@@ -2,8 +2,7 @@
 
 Hello! My name is Dmitry Ingo Epikhin and this is my first project on React + Redux.
 
-To run this app you should clone this repository on your machine and write `npm start` in the project directory.  
-It will opens in your browser (http://localhost:3000).
+Deployed project: https://ingo-o.github.io/google-books-search/
 
 ## Functional:
 
